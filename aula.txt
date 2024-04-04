@@ -1,0 +1,101 @@
+#criando  iniciano eo virtual ambiente.
+virtualenv venv
+
+#ativando a venv
+venv/Scripts/activate
+
+#instalando django na venv
+pip install django
+
+#ver dependencias dos projetos:
+pip feeeze
+
+#criar arquivo com os requisitos do rojeto, para saberem o que precisam instalar
+pip freeze > requirements.txt
+
+#lista os comando do django
+django-admin help
+
+
+iniciando projeto---------
+1 - 
+    -por convenção é inportanto colocar o nome da pasta de configuração como 'setup'
+    -o comando abaixo inicia o projeto.
+    -o ponto no final do comando significa que não será criado uma pasta setup dentro de setup
+    #django-admin startproject setup .
+
+
+2 - Será criado um arquivo chamado manage.py, onde contém as configuração do projeto
+
+3 - execute ctlr+shift+P para abrir p comander do vs code, e digite:
+    python select interpreter
+    
+    O comando acima permite ver em qual python estamos rodando, sendo assim, pois podemos ter varias versões intsladas,
+     porém o ideal é rodar o python da venv
+
+4 - para subir o server:
+    python manage.py runserver
+    Assim que for rodado o comando sera criado um link com porta para voce acessar o server do python
+
+5 - Variavei de ambiente:
+    Sua função é não enviar dados para o servidor de podução, como exenplo, chaves de segurança.
+    pip install python-dotenv
+
+ Devemos criar na raiz do projeto o arquivo: '.env'
+ dentro dele devemos inserir a variavel com a chave sem aspas
+  -> SECRET_KEY = django-insecure-*&bgo-j7_oxkyjt%5c^4em6wudl*_t!ubse#ht(ejj2v-qh8%#
+
+
+6 - Configurando variaveis de ambiente:
+no arquivo setting.py devemos inserir a linha:
+
+    from pathlib import Path, os
+    from dotenv import load_dotenv
+
+    load_dotenv()
+Na linha do SECRET_KEY DEVEMOS DEIXAR:
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
+
+7 - COMANDO GIT:
+ #iniciar diretorio local
+ git init
+
+ #git add ara incluir os arquivos
+ git init
+ git add .
+ git commit -m 'projeto alura space'
+
+
+ 8 - lista comandos do manage.py
+    python manage.py help
+
+9 - Iniciando projeto app:
+    python manage.py startapp galeria
+
+    Após criação do app 
+
+10 - dentro da pasta do app, temos o arquivo view.py, onde iremos incluir o codigo que vai mostrar o html na tela
+
+11 - para quando rodar chamar esse arquivo precisamos incluir o codigo no arquivo:urls.py
+from galeria.views import index
+urlpatterns = [ 
+    path('',index),
+]
+
+12 - templates:
+Para ser possivel definir uma pasta de templates
+em settings.py 
+"TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        (colocar a pasta que foi criada na raiz do projeto para ser acessada pelo django)
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+"
+Dentro do arquivo views.py
+  (indicar o arquivo que sera inicializado como templates)
+  return render(request, 'index.html')
+
+Lembrando que antes disso deve ser feito a rotas:
+
+13 - incluindo arquivos statics
+python manage.py collectstatic

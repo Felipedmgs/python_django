@@ -1,0 +1,73 @@
+1 - clonar o repositorio do git para minha maquina:
+criar pasta, acessar pasta no terminal e executar o git clone.
+
+    /> git clone + link do repositorio
+
+2 - iniciando o progeto na venv
+    /> python -m virtualenv .venv
+
+3 - habilitando a venv:
+    /> .venv\Scripts\activate
+    Caso o comando acima não seja possivel, execute os dois comandos abaixo:
+
+    Set-ExecutionPolicy Unrestricted -Scope Process
+    .\.venv\Scripts\Activate
+
+4 - instalação do pacoter do requires.txt
+    pip install -r requirements.txt
+
+5 - iniciar servidos:
+ python manage.py runserver
+
+6 - definir taela ao django, aqui eu mando ele criar o arquivo de migrate
+  python manage.py help
+  python manage.py makemigrations
+
+  para realmente criar as tabelas:
+  python manage.py migrate
+
+  7 - Incluir dados na base de dados:
+    python manage.py shell
+
+    Executar model que criamos com as tebelas:
+    from galeria.models import Fotografia
+
+    Incluindo dados:
+    foto = Fotografia(nome="Nebulosa de Carina", legeda="webbtelescope.org/NASA/James Webb",foto="carina-nebula.png" )
+
+    depois de incluido podemos salvar: 
+    foto.save()
+
+    Para saber se incluiu correto:
+    Fotografia.objects.all()
+
+    8 - Inserindo mais uma imagem no banco de dado:
+        acessar o shell:
+        python manage.py shell
+
+        from galeria.models import Fotografia
+        foto = Fotografia(nome="Galaxia NGC 1079", legeda="nasa.org / NASA / Hubble", 
+        foto="hubble79.jpg")
+        foto.save()
+
+    9 - BD ADMIN:
+        cria super admin
+        python manage.py createsuperuser
+        felipe
+        a10b20c40
+
+    10 - incluindo tabela no admin:
+         dentro de admin .py deve ser inserido o comando para criação da tabela:
+        from galeria.models import Fotografia
+        admin.site.register(Fotografia)
+
+        alterando maneira queo jango mostra as info no banco:
+        no admin.py:
+
+        class ListandoFotografias(admin.ModelAdmin):
+            list_display = ("id", "nome", "legeda")
+        
+        
+
+
+
