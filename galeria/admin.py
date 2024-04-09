@@ -9,10 +9,11 @@ class ListandoFotografias(admin.ModelAdmin):
     list_display_links = ("id", "nome")
     #add busca
     search_fields = ("nome",)
-    list_filter = ("categoria",)
+    list_filter = ("categoria","usuario")
     list_editable = ("publicada",)
     #quebra de página
     list_per_page = 2
+    
     
 
 
